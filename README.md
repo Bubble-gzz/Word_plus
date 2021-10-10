@@ -2,6 +2,7 @@
 
 A new Flutter project.
 
+![Blueprint](https://github.com/Bubble-gzz/Word_plus/blob/master/assets/blueprint.png)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
