@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_plus/searchbar.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        //   '/home':,
+      },
     );
   }
 }
@@ -55,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      _counter += 2;
     });
   }
 
@@ -72,6 +76,13 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: wordSearch());
+              },
+              icon: Icon(Icons.search)),
+        ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
