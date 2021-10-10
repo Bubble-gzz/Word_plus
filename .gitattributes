@@ -1,0 +1,2 @@
+*.dart linguist-language=dart
+*.yaml linguist-language=yaml

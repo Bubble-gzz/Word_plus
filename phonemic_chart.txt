@@ -1,0 +1,10 @@
+[lhx]
+
+[gzz]
+
+ie,ere,ear,ea,ia.
+ai,ei,e,a,ae.
+
+[zls]
+
+[ryp]
