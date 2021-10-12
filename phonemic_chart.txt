@@ -14,3 +14,4 @@ ow,ao,ou,au.
 [zls]
 
 [ryp]
+ch,tch,ua,ure,eous.
