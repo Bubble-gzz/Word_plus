@@ -4,7 +4,7 @@
 
 ie,ere,ear,ea,ia.
 ai,ei,e,a,ae.
-ue,our,ua,ur.
+ue,our,ua,ur,ure.
 oy,oi.
 ow,o,ou,aw,au,aul,ol.
 ea,air,ear,ere.
