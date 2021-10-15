@@ -13,5 +13,18 @@ ow,ao,ou,au.
 
 [zls]
 
+[p] p, pp;
+[b] b, bb;
+[t] t, tt;
+[d] d, dd; #One may confuse [d] with [ð].
+[f] f, ff;
+[v] v; #One may confused [w] with [v].
+[θ] th; #One may confused [s] with [θ].
+[ð] th; #See [s];
+[m] m, mm;
+[n] n, nn, gn; #One may confused it with the next one.
+[ŋ] m, ng;
+[h] h; 
+
 [ryp]
 ch,tch,ua,ure,eous.
