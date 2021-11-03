@@ -1,4 +1,15 @@
 [lhx]
+ee,e,i,ea.
+ui,i,e,ee.
+oo,o,u,ure.
+oe,ou,oo,ue,ew,eu.
+e,a.
+er,a,ure.
+ir,ur,er,re.
+oor,or,oal,owe,aw,aul,all,ull,oll.
+a,e.
+a,ar,u.
+ar,a.
 
 [gzz]
 
@@ -27,4 +38,12 @@ n, nn, gn, kn, ing, ng, m.
 wh, h.
 
 [ryp]
-ch,tch,ua,ure,eous.
+ch,t,tr.
+j,dr,dge.
+k,ch,c.
+gh,g.
+s,c,th.
+s,z.
+sion,cion,tion.
+rho,ro.
+wh,w.
