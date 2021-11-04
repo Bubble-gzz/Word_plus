@@ -40,6 +40,28 @@ void showtime(string spc)
     cout<<"     Done "<<spc<<" ";
     printf("%.3lfs",cost);
 }
+bool isVowel(char ch) {
+    return (ch=='a' || ch=='o' || ch=='e' || ch=='u' || ch=='i') ;
+}
+void print_division()
+{
+    int i,j;
+    End[0]=-1;
+    cs++;
+    printf("case #%d: ",cs);
+    for (i=1;i<=k;i++)
+    {
+        for (j=End[i-1]+1;j<=End[i];j++) printf("%c",s[j]);
+       printf("/");//,vowel[i]?"VOWEL":"CONSONANT");
+    }
+    printf(" k=%d\n",k);
+}
+bool special_open(string s)
+{
+    if (s[1]=='r' || s[1]=='l') return 1;
+  //  if (s=="ure" || s=="ere" || s==) return 1;
+    return 0;
+}
 struct dictionary_tree
 {
     int pos,tot;
@@ -63,36 +85,17 @@ struct dictionary_tree
         return 1;
     }
 }Tree;
-bool isVowel(char ch) {
-    return (ch=='a' || ch=='o' || ch=='e' || ch=='u' || ch=='i') ;
-}
-void print_division()
-{
-    int i,j;
-    End[0]=-1;
-    cs++;
-    printf("case #%d: ",cs);
-    for (i=1;i<=k;i++)
-    {
-        for (j=End[i-1]+1;j<=End[i];j++) printf("%c",s[j]);
-       printf("/");//,vowel[i]?"VOWEL":"CONSONANT");
-    }
-    printf(" k=%d\n",k);
-}
-bool special_open(string s)
-{
-    if (s[1]=='r' || s[1]=='l') return 1;
-  //  if (s=="ure" || s=="ere" || s==) return 1;
-    return 0;
-}
 void replace(int now,int changed,string t)
 {
     string part=s.substr(End[now-1]+1,End[now]-End[now-1]),_part;
     _part=part;
-    if (part.length()==2 && !isVowel(part[0]) && part[1]=='e') //开音节简化，去掉e
-        part.erase(part.length()-1);
+   // if (part.length()==2 && !isVowel(part[0]) && part[1]=='e') //开音节简化，去掉e
+   //     part.erase(part.length()-1);
     if (now==1) Tree.pos=0;
     int pos_tmp=Tree.pos;
+    if (t=="analy") {
+        int pause=1;
+    }
     if (now>k)
     {
         if (words.find(t)!=words.end()) {
@@ -251,7 +254,7 @@ int main()
     {
         cs=k=0;
         cin>>s;
-  //      if (words.find(s)!=words.end()) printf("word found!\n");
+    //    if (words.find(s)!=words.end()) printf("word found!\n");
     //    else printf("word not found!\n");
         
 //    if (maps.find(s)==maps.end()) printf("Not found!\n");
