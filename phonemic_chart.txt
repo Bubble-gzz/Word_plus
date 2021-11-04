@@ -1,49 +1,48 @@
-[lhx]
-ee,e,i,ea.
-ui,i,e,ee.
-oo,o,u,ure.
-oe,ou,oo,ue,ew,eu.
-e,a.
-er,a,ure.
-ir,ur,er,re.
-oor,or,oal,owe,aw,aul,all,ull,oll.
-a,e.
-a,ar,u.
-ar,a.
-
-[gzz]
-
-ie,ere,ear,ea,ia.
-ai,ei,e,a,ae.
-ue,our,ua,ur,ure.
-oy,oi.
-ow,o,ou,aw,au,aul,ol.
-ea,air,ear,ere.
-ai,i,y,ie.
-ow,ao,ou,au.
-
-[zls]
-
-p, pp.
-b, bb.
-t, tt, ed.
-d, dd, ed, th. 
-f, ff, ph.
-v, f, w, wh, o.
-th, s, c, se, ce.
-d, dd, ed, th. 
-m, mm.
-n, nn, gn, kn, ing, ng, m.
-n, nn, gn, kn, ing, ng, m.
-wh, h.
-
-[ryp]
-ch,t,tr.
-j,dr,dge.
-k,ch,c.
-gh,g.
-s,c,th.
-s,z.
-sion,cion,tion.
-rho,ro.
-wh,w.
+ee e i ea .
+ui i e ee .
+oo o u ure .
+oe ou oo ue ew eu .
+e a .
+er a ure .
+ir ur er re .
+oor or .
+oal owe aw aul all ull oll .
+a e .
+a ar u .
+ar a .
+ie ere ear ea ia .
+ire .
+ai ei e a ae  .
+ue our ua ur ure  .
+oy oi  .
+ow o ou aw au aul ol  .
+ea air ear ere  .
+ai i y ie .
+ow ao ou au .
+p  pp .
+b bb .
+t  tt  ed .
+d  dd  ed  th . 
+f ff ph .
+v  f  w  wh  o .
+th s c se ce .
+d dd ed th . 
+m mm .
+n nn  gn  kn  ing  ng  m .
+wh  h .
+ch  t  tr .
+j  dr  dge .
+k  ch  c .
+gh  g .
+s  c  th .
+s  z .
+s ss .
+rho  ro .
+r rr .
+l ll.
+wh  w .
+sion  cion  tion .
+ure .
+le .
+tary try tray.
+$
