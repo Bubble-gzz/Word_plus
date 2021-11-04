@@ -32,7 +32,7 @@ d  dd  ed  .
 f ff ph gh .
 v  f  w  wh  o .
 th s c se ce .
-d dd ed th . 
+d dd ed . 
 m mm .
 n nn  gn  kn  ing  ng  m .
 wh  h .
@@ -44,6 +44,7 @@ gh  g .
 g ge .
 gg .
 s  c  th .
+th the .
 s  z .
 s ss sc ce.
 rho  ro .
@@ -68,10 +69,13 @@ on orn .
 tri .
 m me mn nm .
 psy sy si sai.
+s sc cs.
 ye i .
 ex ix .
 exc ex .
 se ze .
+s se .
+c ce .
 sy zy .
 x s z .
 ui iu .
