@@ -12,4 +12,5 @@ A new Flutter project.
 |定义距离       |√|继续调参|-|
 |允许适当删除音节|-|enormorous->enormous|2021.11.14|
 |允许适当添加音节|-|ajusment->adjustment|2021.11.14|
+|重构代码|-|将divide和replace过程融合，而不是先divide后replace|2021.11.7|
 |转flutter     |-|-|2021.11.7|
