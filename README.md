@@ -3,15 +3,13 @@
 A new Flutter project.
 
 ![Blueprint](https://github.com/Bubble-gzz/Word_plus/blob/master/assets/blueprint.png)
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 基于读音的模糊匹配算法
+|目标|完成情况|备注|ddl|
+|:------------:|:---:|:---:|:---:|
+|单词拆分       |√|-|-|
+|组合替换       |√|-|-|
+|字典树剪枝     |√|-|-|
+|定义距离       |√|继续调参|-|
+|允许适当删除音节|-|enormorous->enormous|2021.11.14|
+|允许适当添加音节|-|ajusment->adjustment|2021.11.14|
+|转flutter     |-|-|2021.11.7|
