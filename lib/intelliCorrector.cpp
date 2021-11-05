@@ -43,6 +43,10 @@ void showtime(string spc)
 bool isVowel(char ch) {
     return (ch=='a' || ch=='o' || ch=='e' || ch=='u' || ch=='i') ;
 }
+void setcolor(int x) {
+    if (0<=x && x<16) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), x);
+    else SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+}
 void print_division()
 {
     int i,j;
@@ -62,14 +66,22 @@ bool special_open(string s)
   //  if (s=="ure" || s=="ere" || s==) return 1;
     return 0;
 }
-struct dictionary_tree
+struct Trie
 {
     int pos,tot;
     int ch[Size][26];
+    void clear()
+    {
+        pos=0; tot=0;
+        memset(ch[0],0,sizeof(ch[0]));
+    }
     int walk(char wh,int modify)
     {
         if (!ch[pos][wh-'a']) {
-            if (modify) ch[pos][wh-'a']=++tot;
+            if (modify) {
+                ch[pos][wh-'a']=++tot;
+                memset(ch[tot],0,sizeof(ch[tot]));
+            }
             else return 0;
         }
         pos=ch[pos][wh-'a'];
@@ -85,7 +97,23 @@ struct dictionary_tree
         return 1;
     }
 }Tree;
-void replace(int now,int changed,string t)
+void judge(string t,int dist)
+{
+    if (words.find(t)!=words.end()) {
+        if (ans.find(t)==ans.end())
+        {
+        //    cout<<endl<<"         found "<<t;
+        //    showtime("at");
+            ans[t]=dist;
+            for (int i=1;i<=k;i++) {
+                Ans[t].a.push_back(t.substr(bp[i-1]+1,bp[i]-bp[i-1]));
+                Ans[t].b.push_back(Changed[i]);
+            }
+        }
+        found=1;
+    }
+}
+void replace(int now,int changed,int distance,string t)
 {
     string part=s.substr(End[now-1]+1,End[now]-End[now-1]),_part;
     _part=part;
@@ -98,19 +126,7 @@ void replace(int now,int changed,string t)
     }
     if (now>k)
     {
-        if (words.find(t)!=words.end()) {
-            if (ans.find(t)==ans.end())
-            {
-            //    cout<<endl<<"         found "<<t;
-            //    showtime("at");
-                ans[t]=1;
-                for (int i=1;i<=k;i++) {
-                    Ans[t].a.push_back(t.substr(bp[i-1]+1,bp[i]-bp[i-1]));
-                    Ans[t].b.push_back(Changed[i]);
-                }
-            }
-            found=1;
-        }
+        judge(t,distance);
         return ;
     }
     if (maps.find(part)==maps.end()) return ;
@@ -118,7 +134,7 @@ void replace(int now,int changed,string t)
     if (Tree.walk(_part,0)) {
         Changed[now]=0;
         bp[now]=bp[now-1]+_part.length();
-        replace(now+1,changed,t+_part);
+        replace(now+1,changed,distance,t+_part);
     }
     Tree.pos=pos_tmp;
     if (changed>=Lim) return ;
@@ -128,7 +144,7 @@ void replace(int now,int changed,string t)
         Changed[now]=1;
         if (Tree.walk(ss,0)) {
             bp[now]=bp[now-1]+ss.length();
-            replace(now+1,changed+1,t+ss);
+            replace(now+1,changed+1,distance+(*i).second,t+ss);
         }
         Changed[now]=0;
         Tree.pos=pos_tmp;
@@ -139,7 +155,7 @@ void divide(int i)
     if (i+1>len) {
         if (Lim<0) print_division();
         if (k>maxK) maxK=k;
-        replace(1,0,"");
+        replace(1,0,0,"");
         return ;
     }
     int j,flag;
@@ -185,7 +201,10 @@ void correct()
     else if (s.length()<=4) Lim=2;
     else Lim=maxK/2;
     divide(0);
-    if (!found) printf("Cannot recognize!\n");
+    if (!found) {
+        setcolor(4);
+        printf("Cannot recognize!\n");
+    }
     else {
         printf("\nGuess you want:\n");
         for (auto i=ans.begin();i!=ans.end();i++)
@@ -193,17 +212,21 @@ void correct()
             seg ss=Ans[(*i).first];
             for (int i=0;i<ss.a.size();i++)
             {
-                if (ss.b[i]) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
-                else SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                if (ss.b[i]) setcolor(2);
+                else setcolor(7);
                 cout<<ss.a[i];
             }
-            cout<<endl;
+            setcolor(7);
+            for (int j=0;j<=25-(*i).first.length();j++) putchar(' ');
+            cout<<"distance = "<<(*i).second<<endl;
         }
     }
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+    setcolor(7);
 }
-int main()
+void reload()
 {
+    Tree.clear();
+    words.clear();
     FILE *wd=fopen("vocalbulary.json","r");
     fgets(line,500,wd);
     fgets(line,500,wd);
@@ -222,9 +245,9 @@ int main()
         words[s]=1;
     }
     fclose(wd);
+
+    maps.clear();
     ifstream _in("combination.in");
-//    Tree.pos=0;
-//    printf("%d\n",Tree.walk("facilitate",0));
     while (1)
     {
      
@@ -249,17 +272,27 @@ int main()
                         maps[tmp[i]].list[tmp[j]]=1;
     }
     _in.close();
-//    fclose(stdin);
+}
+int main()
+{
+    reload();
     while (1)
     {
         cs=k=0;
+        setcolor(7);
         cin>>s;
+        if (s[0]=='$') {
+            reload();
+            setcolor(6);
+            printf("\n Hot reloaded.\n");
+            continue;
+        }
     //    if (words.find(s)!=words.end()) printf("word found!\n");
     //    else printf("word not found!\n");
         
 //    if (maps.find(s)==maps.end()) printf("Not found!\n");
 //    else cout<<s<<endl;
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
         len=s.length();
         start_time=clock();
         correct();
