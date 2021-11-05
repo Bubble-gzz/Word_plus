@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <queue>
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -12,6 +13,7 @@ using namespace std;
 const int N=100;
 const int K=50;
 const int Size=500000;
+const int DIST[7]={1,1,3,5,8,10,20};
 string s;
 string tmp[N];
 char line[1000];
@@ -29,6 +31,18 @@ struct seg{
     vector<int> b;
     seg(){}
 };
+struct pr{
+    string s;
+    int dist;
+    pr(string S,int DIST):s(S),dist(DIST){}
+    pr(){}
+};
+struct cmp{
+    bool operator () (const pr &A,const pr &B) {
+        return A.dist>B.dist;
+    }
+};
+priority_queue<pr,vector<pr>,cmp> heap;
 map<string,cp> maps;
 map<string,int> words;
 map<string,int> ans;
@@ -102,14 +116,14 @@ void judge(string t,int dist)
     if (words.find(t)!=words.end()) {
         if (ans.find(t)==ans.end())
         {
-        //    cout<<endl<<"         found "<<t;
-        //    showtime("at");
             ans[t]=dist;
+            heap.push(pr(t,dist));
             for (int i=1;i<=k;i++) {
                 Ans[t].a.push_back(t.substr(bp[i-1]+1,bp[i]-bp[i-1]));
                 Ans[t].b.push_back(Changed[i]);
             }
         }
+        else ans[t]=min(ans[t],dist);
         found=1;
     }
 }
@@ -121,9 +135,6 @@ void replace(int now,int changed,int distance,string t)
    //     part.erase(part.length()-1);
     if (now==1) Tree.pos=0;
     int pos_tmp=Tree.pos;
-    if (t=="analy") {
-        int pause=1;
-    }
     if (now>k)
     {
         judge(t,distance);
@@ -153,7 +164,7 @@ void replace(int now,int changed,int distance,string t)
 void divide(int i)
 {
     if (i+1>len) {
-        if (Lim<0) print_division();
+       // if (Lim==0) print_division();
         if (k>maxK) maxK=k;
         replace(1,0,0,"");
         return ;
@@ -189,26 +200,19 @@ void divide(int i)
             break;
         }
 }
-void correct()
+void Output()
 {
-    found=0;
-    ans.clear();
-    Ans.clear();
-    End[0]=bp[0]=-1;
-    Lim=0; maxK=k=0;
-    divide(0);
-    if (s.length()<=3) Lim=1;
-    else if (s.length()<=4) Lim=2;
-    else Lim=maxK/2;
-    divide(0);
     if (!found) {
         setcolor(4);
         printf("Cannot recognize!\n");
     }
     else {
         printf("\nGuess you want:\n");
-        for (auto i=ans.begin();i!=ans.end();i++)
+        for (int o=1;o<=5;o++)
         {
+            if (heap.empty()) break;
+            if (heap.top().dist>Lim*3 && o>1) break;
+            auto i=ans.find(heap.top().s);
             seg ss=Ans[(*i).first];
             for (int i=0;i<ss.a.size();i++)
             {
@@ -219,9 +223,29 @@ void correct()
             setcolor(7);
             for (int j=0;j<=25-(*i).first.length();j++) putchar(' ');
             cout<<"distance = "<<(*i).second<<endl;
+            heap.pop();
         }
     }
     setcolor(7);
+    cout<<endl;
+}
+void correct()
+{
+    found=0;
+    ans.clear();
+    Ans.clear();
+    while (!heap.empty()) heap.pop();
+    End[0]=bp[0]=-1;
+    Lim=0; maxK=k=0;
+    divide(0);
+    Lim=maxK;
+/*
+    if (s.length()<=3) Lim=1;
+    else if (s.length()<=4) Lim=2;
+    else Lim=maxK/2;
+*/
+    divide(0);
+    Output();
 }
 void reload()
 {
@@ -254,14 +278,20 @@ void reload()
         _in>>s;
         if (s[0]=='$') break;
         sn=0; flag=0;
+        int type=1;
         while (1)
         {
             if (s[0]=='.') break;
             if (s[s.length()-1]=='.') {s.erase(s.length()-1); flag=1;}
-            sn++;
-            tmp[sn]=s;
-            if (maps.find(s)==maps.end())
-                maps[s]=cp(s);
+            if (s[0]>='0' && s[0]<='9') {
+                type=atoi(s.c_str());
+            }
+            else {
+                sn++;
+                tmp[sn]=s;
+                if (maps.find(s)==maps.end())
+                    maps[s]=cp(s);
+            }
             if (flag) break;
             _in>>s;
         }
@@ -269,7 +299,8 @@ void reload()
             rep(j,1,sn)
                 if (i!=j)
                     if (maps[tmp[i]].list.find(tmp[j])==maps[tmp[i]].list.end())
-                        maps[tmp[i]].list[tmp[j]]=1;
+                        maps[tmp[i]].list[tmp[j]]=DIST[type];
+                    else maps[tmp[i]].list[tmp[j]]=min(maps[tmp[i]].list[tmp[j]],DIST[type]);
     }
     _in.close();
 }
